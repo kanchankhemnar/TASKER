@@ -7,27 +7,54 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <div class="main w-full min-h-screen bg-zinc-900 color-white ">
+    <div class="main w-full min-h-screen bg-zinc-900 color-white">
       <div class="form p-10 text-white">
         <form action="/create" method="post">
-          <input class="block px-5 py-2 bg-zinc-800 w-full rounded-md outline-none"  type="text" placeholder="Title.."  name="title"/>
-          <textarea  class="block px-5 py-2 mt-2 bg-zinc-800 resize-none w-full rounded-md outline-none"  id="" placeholder="write task details...." name="details"></textarea>
-          <input class="mt-2 bg-blue-600 px-5 py-2 rounded-md" type="submit" value="Create Task" />
+          <input
+            class="block px-5 py-2 bg-zinc-700 w-full rounded-md outline-none"
+            type="text"
+            placeholder="Title.."
+            name="title"
+          />
+          <textarea
+            class="block px-5 py-2 mt-2 bg-zinc-700 resize-none w-full rounded-md outline-none"
+            id=""
+            placeholder="write task details...."
+            name="details"
+          ></textarea>
+          <input
+            class="mt-2 bg-blue-600 px-5 py-2 rounded-md cursor-pointer"
+            type="submit"
+            value="Create Task"
+          />
         </form>
       </div>
-      <div class="tasks flex gap-3 flex-wrap  p-10 ">
-        <% if(files.length > 0){ %>
+      <div class="tasks flex gap-3 flex-wrap p-10">
+        <% if(files.length > 0){ %> <% files.forEach((val)=>{ %>
 
-          <% files.forEach((val)=>{ %>
-  
-            <div class="task min-w-60   px-3 py-4 rounded-md bg-zinc-800 ">
+        <div class="task min-w-60 px-3 py-4 rounded-md bg-zinc-800">
+          <div class="flex items-center justify-between w-full">
             <h1 class="text-white text-2xl tracking-tighter"><%= val %></h1>
-            <a class="text-blue-500 inline-block mt-3" href="/file/<%= val %>">Read More.</a>
-            </div>
-         <% }) %>
-       <% } else { %>
-      <h3 class="text-zinc-600">No task yet.</h3>
-      <% } %>
+
+            <a href="/delete/<%= val %>">
+              <img
+                src="https://img.icons8.com/?size=100&id=11997&format=png&color=000000"
+                alt=""
+                class="w-6 h-6"
+              />
+            </a>
+          </div>
+
+          <div class="flex w-full justify-between mt-3">
+            <a class="text-blue-500 inline-block" href="/file/<%= val %>"
+              >Read More.</a
+            >
+            <a class="text-zinc-400" href="/edit/<%= val %>">Edit Title</a>
+          </div>
+        </div>
+        <% }) %> <% } else { %>
+        <h3 class="text-zinc-600">No task yet.</h3>
+        <% } %>
       </div>
     </div>
   </body>
